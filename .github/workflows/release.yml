@@ -1,0 +1,45 @@
+name: Release eZine & Web Build
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on semantic release tags like v1.0.0
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Publish Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+
+      - name: Build Release WASM Package
+        run: wasm-pack build --target web --release
+
+      - name: Package Distribution Assets
+        run: |
+          mkdir -p dist
+          cp index.html dist/
+          cp -r pkg dist/
+          # Optional: bundle any static single-file HTML eZines or assets
+          zip -r worms_game_web_release.zip dist/
+
+      - name: Create GitHub Release & Upload Artifacts
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            worms_game_web_release.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
