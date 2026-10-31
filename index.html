@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Worms Game Web Rebuild</title>
+    <style>
+        body {
+            background-color: #101612;
+            color: #ffb3c6;
+            font-family: monospace;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #browser-chrome {
+            border: 2px solid #4a6b6c;
+            background: #19221c;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        #game-canvas {
+            background: #000;
+            image-rendering: pixelated;
+            width: 640px;
+            height: 480px;
+            display: block;
+        }
+        #game-hud {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="browser-chrome">
+        <canvas id="game-canvas" width="320" height="240"></canvas>
+        <div id="game-hud">
+            <span>ARMOR: 100</span>
+            <span>WEAPON: BAZOOKA</span>
+            <span>WIND: +2.4</span>
+        </div>
+    </div>
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
