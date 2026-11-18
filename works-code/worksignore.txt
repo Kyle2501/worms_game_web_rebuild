@@ -1,0 +1,6 @@
+# Ignore raw source files and backups
+*.psd
+*.aseprite
+drafts/
+_temp/
+.DS_Store
