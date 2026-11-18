@@ -1,0 +1,5 @@
+[dependencies]
+rayon = "1.10"
+ignore = "0.4"
+flate2 = "1.0"
+anyhow = "1.0"
